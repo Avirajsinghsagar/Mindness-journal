@@ -1,305 +1,172 @@
-# 🧠 MindWell – Secure Mental Wellness Journal
+# 🧠 MindWell – AI-Powered Mental Wellness Journal
 
-MindWell is a **privacy-focused full-stack mental wellness application** that allows users to securely write personal journal entries, track moods, visualize emotional patterns, and practice guided breathing exercises.
-
-The main goal of this project is to build a **secure digital journaling platform where user data privacy is the top priority**.
-
-Journal entries are **encrypted before being stored in the database**, ensuring that even database administrators cannot read user content.
+MindWell is a **full-stack mental wellness application** with **Machine Learning integration** that allows users to securely write journal entries, track moods, and get real-time AI-powered emotional insights.
 
 ---
 
-# 📌 Project Overview
+## 🚀 Key Features
 
-In today's digital world, mental health applications are becoming essential. However, users are often hesitant to store personal thoughts online due to privacy concerns.
+### 🔐 Secure Authentication
+- JWT-based login/register
+- AES-encrypted journal entries (even DB admins can't read them)
+- bcrypt password hashing
 
-MindWell solves this problem by implementing **encryption-based journaling**, ensuring that personal reflections remain **completely secure and private**.
+### 🤖 ML/AI Integration (Python Microservice)
+- **DistilBERT NLP sentiment analysis** on every journal entry
+- Detects emotions: Joy, Sadness, Anger, Fear, Surprise, Disgust
+- **scikit-learn mood prediction** — predicts tomorrow's mood from history
+- **Isolation Forest anomaly detection** — alerts when mood pattern is unusual
 
-Users can:
+### 📝 Smart Journaling
+- AI-generated daily prompts
+- Real-time emotion badge after saving entry
+- Confidence score from NLP model
+- AES encrypted storage in MongoDB
 
-* Write secure journal entries
-* Track mood and energy levels
-* Visualize mood trends
-* Use a breathing assistant for relaxation
-* Export personal data
+### 📊 Wellness Dashboard
+- Mood + Energy dual-line chart (Chart.js)
+- Stat cards: Latest mood, Average mood, AI-predicted mood
+- Wellness alert banner for anomaly detection
+- Mood logger with sliders
 
----
-
-# 🚀 Key Features
-
-## 🔐 User Authentication
-
-* User Registration
-* User Login
-* JWT Authentication
-* Protected API routes
-
----
-
-## 📝 Secure Journal Entries
-
-Users can write journal entries that are **encrypted before storage**.
-
-### Encryption Strategy
-
-The system uses **AES encryption (crypto-js)** to secure journal content.
-
-Example encrypted entry stored in MongoDB:
-
-U2FsdGVkX1+8rKAr3HVHHDRnugeDErK1jty4Ly4K8jTnxZ0pMVw8bXNbQzufKnO2
-
-This ensures **Encryption at Rest**, meaning raw database data cannot be read.
+### 🌬️ Breathing Exercise
+- 4-7-8 breathing technique
+- Animated breathing guide
 
 ---
 
-## 💡 Guided Journal Prompts
+## 🛠 Tech Stack
 
-To help users begin writing, the system provides **random prompts** such as:
-
-* What made you smile today?
-* What are you grateful for today?
-* What challenged you today?
-* What did you learn today?
-
-These prompts encourage self-reflection and mindfulness.
-
----
-
-## 🙂 Mood Tracking
-
-Users can log:
-
-* Mood Level (1–10)
-* Energy Level (1–10)
-
-This allows users to reflect on emotional patterns over time.
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React.js, Chart.js, Axios |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas, Mongoose |
+| ML Service | Python, FastAPI, HuggingFace Transformers |
+| ML Models | DistilBERT, scikit-learn, Isolation Forest |
+| Security | JWT, AES Encryption, bcrypt |
 
 ---
 
-## 📊 Mood Analytics Dashboard
+## 📂 Project Structure
 
-Mood entries are visualized using **Chart.js** to display emotional trends.
-
-Users can view:
-
-* Mood over time
-* Daily emotional progress
-
-This helps users better understand their mental wellbeing.
-
----
-
-## 🌬️ Breathing Exercise Tool
-
-MindWell includes a **breathing assistant** that helps users relax.
-
-Breathing pattern used:
-
-Inhale – 4 seconds
-Hold – 7 seconds
-Exhale – 8 seconds
-
-The UI provides a simple breathing animation to guide users.
-
----
-
-## 🌙 Dark Mode
-
-The application includes a **Dark Mode toggle** to provide a calming interface and reduce eye strain.
-
-Users can switch between:
-
-* Light Mode
-* Dark Mode
-
----
-
-## 📥 Data Export
-
-Users can download their personal journal data.
-
-Export format:
-
-JSON File
-
-Example file:
-
-mindwell-journal.json
-
-This ensures **data ownership and transparency**.
-
----
-
-# 🛠 Tech Stack
-
-## Frontend
-
-* React.js
-* Axios
-* Chart.js
-* CSS
-
-## Backend
-
-* Node.js
-* Express.js
-
-## Database
-
-* MongoDB Atlas
-* Mongoose
-
-## Security
-
-* JWT Authentication
-* AES Encryption (crypto-js)
-* Password Hashing (bcrypt)
-
----
-
-# 📂 Project Structure
-
-MindWell
+```
+MindWell/
+├── client/                 # React frontend
+│   └── src/
+│       ├── pages/          # Dashboard, Journal, Login, Register, Breathing
+│       ├── components/     # Navbar, ProtectedRoute
+│       └── api/            # Axios config
 │
-├── client
-│   ├── src
-│   │   ├── pages
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── Journal.jsx
-│   │   │   ├── Login.jsx
-│   │   │   ├── Breathing.jsx
-│   │   │
-│   │   ├── components
-│   │   │   ├── Navbar.js
-│   │   │   ├── ProtectedRoute.js
-│   │   │
-│   │   ├── api
-│   │   │   ├── axios.js
+├── server/                 # Node.js backend
+│   ├── controllers/        # journalController, moodController
+│   ├── models/             # JournalEntry, MoodEntry, User
+│   ├── routes/             # auth, journal, mood routes
+│   └── utils/              # AES encryption
 │
-├── server
-│   ├── models
-│   │   ├── User.js
-│   │   ├── JournalEntry.js
-│   │   ├── MoodEntry.js
-│   │
-│   ├── controllers
-│   │   ├── journalController.js
-│   │   ├── moodController.js
-│   │
-│   ├── routes
-│   │   ├── authRoutes.js
-│   │   ├── journalRoutes.js
-│   │   ├── moodRoutes.js
-│   │
-│   ├── utils
-│   │   ├── encryption.js
-│   │
-│   ├── server.js
-│
-└── README.md
+└── ml-service/             # Python FastAPI ML microservice
+    └── main.py             # 3 endpoints: sentiment, prediction, anomaly
+```
 
 ---
 
-# ⚙️ Installation Guide
+## ⚙️ Installation & Setup
 
-## Clone the Repository
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Avirajsinghsagar/Mindness-journal.git
+cd Mindness-journal
+```
 
-git clone https://github.com/yourusername/mindwell-journal.git
-
----
-
-## Install Backend
-
+### 2. Backend Setup
+```bash
 cd server
 npm install
+```
 
-Run backend server:
+Create `server/.env`:
+```
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+ENCRYPTION_KEY=your_encryption_key
+```
 
+```bash
 node server.js
+```
 
-Backend runs on:
+### 3. ML Service Setup
+```bash
+cd ml-service
+python -m venv venv
+venv\Scripts\activate       # Windows
+pip install fastapi uvicorn transformers torch scikit-learn pandas numpy
+uvicorn main:app --reload --port 8000
+```
 
-http://localhost:5000
-
----
-
-## Install Frontend
-
+### 4. Frontend Setup
+```bash
 cd client
 npm install
-
-Run frontend:
-
 npm start
-
-Frontend runs on:
-
-http://localhost:3000
+```
 
 ---
 
-# 🔑 Environment Variables
+## 🔗 API Endpoints
 
-Create `.env` inside the **server folder**.
+### Auth
+- `POST /api/auth/register` — Register user
+- `POST /api/auth/login` — Login user
 
-PORT=5000
+### Journal
+- `POST /api/journal` — Create entry (triggers ML sentiment analysis)
+- `GET /api/journal` — Get all entries (decrypted)
+- `GET /api/journal/export` — Export journal as JSON
 
-MONGO_URI=your_mongodb_connection_string
+### Mood
+- `POST /api/mood` — Log mood + energy
+- `GET /api/mood` — Get mood history
 
-JWT_SECRET=your_secret_key
-
-ENCRYPTION_KEY=your_encryption_key
-
----
-
-# 📊 Database Security Example
-
-Raw data stored in MongoDB:
-
-content: "U2FsdGVkX1+8rKAr3HVHHDRnugeDErK1jty4Ly4K8jTnxZ0pMVw8bXNbQzufKnO2"
-
-This confirms that journal entries are **encrypted before storage**.
+### ML Service (Port 8000)
+- `POST /analyze-sentiment` — DistilBERT emotion detection
+- `POST /predict-mood` — scikit-learn mood prediction
+- `POST /detect-anomaly` — Isolation Forest anomaly detection
 
 ---
 
-# 📅 Development Timeline
+## 🤖 ML Pipeline
 
-Week 1
-Authentication, Encryption, Journal CRUD
-
-Week 2
-Mood Tracking and Analytics Dashboard
-
-Week 3
-Breathing Assistant and UI Improvements
-
-Week 4
-Data Export and Final Testing
-
----
-
-# 📸 Screenshots
-
-Add screenshots of:
-
-* Login Page
-* Journal Entry Page
-* MongoDB Encrypted Data
-* Mood Dashboard
-* Breathing Exercise
-* Exported JSON File
+```
+User writes journal entry
+        ↓
+Node.js backend receives text
+        ↓
+Calls Python FastAPI ML service
+        ↓
+DistilBERT analyzes emotion (Joy/Sadness/Anger etc.)
+        ↓
+Returns emotion + confidence score
+        ↓
+Stored in MongoDB alongside encrypted entry
+        ↓
+Displayed as emotion badge in UI
+```
 
 ---
 
-# 👨‍💻 Author
+## 👨‍💻 Author
 
-Aviraj Singh Sagar
-Full Stack Developer Intern Project
+**Aviraj Singh Sagar**
+Full Stack Developer Intern
 
 ---
 
-# ⭐ Future Improvements
+## ⭐ Resume Highlights
 
-* Mobile responsive UI
-* PDF export
-* Weekly mood reports
-* Premium analytics
+- Integrated **DistilBERT NLP** model via Python FastAPI microservice for real-time sentiment analysis
+- Built **mood prediction** using scikit-learn GradientBoosting on user's mood history
+- Implemented **Isolation Forest anomaly detection** for wellness alerts
+- **AES encryption at rest** — journal entries encrypted before MongoDB storage
+- Full-stack: React + Node.js + Python ML microservice architecture
